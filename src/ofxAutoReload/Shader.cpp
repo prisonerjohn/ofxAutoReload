@@ -5,7 +5,8 @@
 namespace ofxAutoReload
 {
 	Shader::Shader()
-		: autoUpdate(false)
+		: loadTime(0)
+		, autoUpdate(false)
 	{}
 
 	Shader::~Shader()
