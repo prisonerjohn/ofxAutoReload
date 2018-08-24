@@ -61,6 +61,7 @@ namespace ofxAutoReload
 	void Shader::reload()
 	{
 		this->program.setup(this->settings);
+		this->reloadEvent.notify();
 	}
 
 	void Shader::setAutoUpdate(bool autoUpdate)

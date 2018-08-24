@@ -24,6 +24,8 @@ namespace ofxAutoReload
 		ofShaderSettings settings;
 		time_t loadTime;
 
+		ofEvent<void> reloadEvent;
+
 	private:
 		void _update(ofEventArgs & args);
 
