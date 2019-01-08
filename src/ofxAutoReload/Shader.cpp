@@ -17,6 +17,7 @@ namespace ofxAutoReload
 	void Shader::setup(const ofShaderSettings & settings, bool autoUpdate)
 	{
 		this->settings = settings;
+		this->loadTime = 0;
 		this->setAutoUpdate(autoUpdate);
 		this->update();
 	}
@@ -24,6 +25,7 @@ namespace ofxAutoReload
 	void Shader::clear()
 	{
 		this->setAutoUpdate(false);
+		this->loadTime = 0;
 		this->settings = ofShaderSettings();
 		this->program.unload();
 	}
