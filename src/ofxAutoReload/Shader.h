@@ -22,7 +22,7 @@ namespace ofxAutoReload
 	public:
 		ofShader program;
 		ofShaderSettings settings;
-		time_t loadTime;
+		std::filesystem::file_time_type loadTime;
 
 		ofEvent<void> reloadEvent;
 

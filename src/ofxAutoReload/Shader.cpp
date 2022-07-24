@@ -5,8 +5,7 @@
 namespace ofxAutoReload
 {
 	Shader::Shader()
-		: loadTime(0)
-		, autoUpdate(false)
+		: autoUpdate(false)
 	{}
 
 	Shader::~Shader()
@@ -17,7 +16,7 @@ namespace ofxAutoReload
 	void Shader::setup(const ofShaderSettings & settings, bool autoUpdate)
 	{
 		this->settings = settings;
-		this->loadTime = 0;
+		this->loadTime = std::filesystem::file_time_type();
 		this->setAutoUpdate(autoUpdate);
 		this->update();
 	}
@@ -25,7 +24,7 @@ namespace ofxAutoReload
 	void Shader::clear()
 	{
 		this->setAutoUpdate(false);
-		this->loadTime = 0;
+		this->loadTime = std::filesystem::file_time_type();
 		this->settings = ofShaderSettings();
 		this->program.unload();
 	}
@@ -42,11 +41,11 @@ namespace ofxAutoReload
 			ofLogError(__FUNCTION__) << "No shader files set in settings!";
 			return;
 		}
-		time_t writeTime = 0;
+		auto writeTime = std::filesystem::file_time_type();
 		std::filesystem::path filePath;
 		for (auto it : this->settings.shaderFiles)
 		{
-			time_t fileTime = std::filesystem::last_write_time(ofToDataPath(it.second));
+			auto fileTime = std::filesystem::last_write_time(ofToDataPath(it.second));
 			if (writeTime < fileTime)
 			{
 				writeTime = fileTime;
